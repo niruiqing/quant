@@ -11,7 +11,8 @@ Backtrader Hello World - 使用本地模拟数据
 - Broker: 模拟券商（处理订单、资金）
 """
 
-import backtrader as bt
+import backtrader_next as bt
+print("bt module path:", bt.__file__)  
 import pandas as pd
 import random
 from datetime import datetime
@@ -124,7 +125,7 @@ def main():
     # 4. 加载数据
     # 将 datetime 设置为索引，Backtrader 会自动识别
     df_indexed = df.set_index('datetime')
-    data = bt.feeds.PandasData(dataname=df_indexed)
+    data = bt.feeds.PandasData(dataframe=df_indexed)
     cerebro.adddata(data)
 
     # 5. 设置初始资金
@@ -147,9 +148,9 @@ def main():
     print(f"💰 最终资金: {final_value:.2f}")
     print(f"📊 总收益: {final_value - initial_cash:.2f} ({(final_value/initial_cash - 1)*100:.2f}%)")
 
-    # 9. 绘制结果
+    # 9. 绘制结果 
     print("\n📈 正在生成图表...")
-    cerebro.plot(style='candlestick', barup='red', bardown='green')
+    cerebro.plot(filename='my_strategy.html',style='candlestick', barup='red', bardown='green')
     print("✓ 完成！")
 
 
