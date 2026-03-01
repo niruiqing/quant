@@ -10,7 +10,7 @@ Backtrader 订单管理详解
 4. 如何追踪订单和交易
 """
 
-import backtrader as bt
+import backtrader_next as bt
 import pandas as pd
 import random
 from datetime import datetime
@@ -212,7 +212,7 @@ def main():
     cerebro.addstrategy(OrderManagementStrategy)
 
     # 4. 加载数据
-    data = bt.feeds.PandasData(dataname=df_indexed)
+    data = bt.feeds.PandasData(dataframe=df_indexed)
     cerebro.adddata(data)
 
     # 5. 设置初始资金
@@ -250,7 +250,7 @@ def main():
 
     # 10. 绘制结果
     print("\n📈 正在生成图表...")
-    cerebro.plot(style='candlestick', barup='red', bardown='green')
+    cerebro.plot(filename="my_strategy.html",style='candlestick', barup='red', bardown='green')
     print("✓ 完成！")
 
 
