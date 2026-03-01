@@ -20,6 +20,9 @@ venv.bak/
 # --- IDE: VSCode (如需共享配置，请删除下一行) ---
 .vscode/
 
+# --- Claude Code ---
+.claude/
+
 # --- IDE: PyCharm / IntelliJ ---
 .idea/
 *.iml

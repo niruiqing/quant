@@ -65,10 +65,13 @@ class DualMAStrategy(bt.Strategy):
 
     def __init__(self):
         """初始化指标"""
+        # 订单追踪
+        self.order = None
+
         # 快线
         self.fast_ma = bt.indicators.SMA(self.data.close, period=self.params.fast_period)
         # 慢线
-        self.slow_ma = bt.indicators.SMA(self.data.close, period=self.params.slow_ma)
+        self.slow_ma = bt.indicators.SMA(self.data.close, period=self.params.slow_period)
 
         # 交叉信号（1: 金叉, -1: 死叉）
         self.crossover = bt.indicators.CrossOver(self.fast_ma, self.slow_ma)

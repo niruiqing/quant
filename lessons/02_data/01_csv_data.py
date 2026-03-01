@@ -104,25 +104,12 @@ def main():
     # 3. 添加策略
     cerebro.addstrategy(SimpleStrategy)
 
-    # 4. 方式一：使用 CSVGeneralData 直接读取
-    print("\n📂 使用 CSVGeneralData 加载...")
-    data = bt.feeds.CSVGeneralData(
-        dataname=csv_path,
-        datetime=0,      # datetime 在第 0 列
-        open=1,          # open 在第 1 列
-        high=2,          # high 在第 2 列
-        low=3,           # low 在第 3 列
-        close=4,         # close 在第 4 列
-        volume=5,        # volume 在第 5 列
-        openinterest=6,  # openinterest 在第 6 列
-    )
-
-    # 方式二：使用 Pandas 读取后加载（推荐，更灵活）
-    # print("\n📂 使用 Pandas 加载...")
-    # df = pd.read_csv(csv_path)
-    # df['datetime'] = pd.to_datetime(df['datetime'])
-    # df.set_index('datetime', inplace=True)
-    # data = bt.feeds.PandasData(dataname=df)
+    # 4. 使用 Pandas 读取后加载（推荐，更灵活）
+    print("\n📂 使用 Pandas 加载 CSV...")
+    df = pd.read_csv(csv_path)
+    df['datetime'] = pd.to_datetime(df['datetime'])
+    df.set_index('datetime', inplace=True)
+    data = bt.feeds.PandasData(dataname=df)
 
     cerebro.adddata(data)
 

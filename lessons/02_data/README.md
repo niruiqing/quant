@@ -24,31 +24,15 @@ Backtrader 需要标准的 OHLCV 格式数据：
 
 ## 📊 数据源类型
 
-### 1. CSV 文件加载
-
-```python
-# 基础 CSV 加载
-data = bt.feeds.CSVGeneralData(
-    dataname='stock.csv',
-    datetime=0,      # datetime 列的索引
-    open=1,
-    high=2,
-    low=3,
-    close=4,
-    volume=5,
-    openinterest=6
-)
-```
-
-### 2. Pandas DataFrame 加载
+### 1. Pandas DataFrame 加载（推荐）
 
 ```python
 import pandas as pd
 
-# 读取数据
+# 读取 CSV 数据
 df = pd.read_csv('stock.csv')
 
-# 确保 datetime 是索引
+# 确保 datetime 是索引（必须步骤）
 df['datetime'] = pd.to_datetime(df['datetime'])
 df.set_index('datetime', inplace=True)
 
@@ -56,18 +40,7 @@ df.set_index('datetime', inplace=True)
 data = bt.feeds.PandasData(dataname=df)
 ```
 
-### 3. Yahoo Finance 数据
-
-```python
-# 需要安装: pip install yfinance
-data = bt.feeds.YahooFinanceData(
-    dataname='AAPL',
-    fromdate=datetime(2020, 1, 1),
-    todate=datetime(2023, 12, 31)
-)
-```
-
-### 4. TuShare 数据（中国股市）
+### 2. TuShare 数据（中国股市）
 
 ```python
 import tushare as ts
@@ -82,6 +55,17 @@ df.set_index('trade_date', inplace=True)
 
 # 加载
 data = bt.feeds.PandasData(dataname=df)
+```
+
+### 3. Yahoo Finance 数据
+
+```python
+# 需要安装: pip install yfinance
+data = bt.feeds.YahooFinanceData(
+    dataname='AAPL',
+    fromdate=datetime(2020, 1, 1),
+    todate=datetime(2023, 12, 31)
+)
 ```
 
 ---

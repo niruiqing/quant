@@ -1,0 +1,12 @@
+# Backtrader 量化交易框架
+backtrader==1.9.78.123
+backtrader_next
+
+# 数据处理
+pandas==3.0.0
+
+# 数据可视化
+matplotlib==3.10.8
+
+# 中国股市数据获取（可选）
+tushare==1.4.24
