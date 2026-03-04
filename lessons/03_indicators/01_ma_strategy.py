@@ -10,7 +10,7 @@ Backtrader 移动平均线策略示例
 4. 指标的可视化
 """
 
-import backtrader as bt
+import backtrader_next as bt
 import pandas as pd
 import random
 from datetime import datetime
@@ -202,7 +202,7 @@ def run_strategy(strategy_class, strategy_name):
     cerebro.addstrategy(strategy_class)
 
     # 加载数据
-    data = bt.feeds.PandasData(dataname=df_indexed)
+    data = bt.feeds.PandasData(dataframe=df_indexed)
     cerebro.adddata(data)
 
     # 设置资金和手续费
@@ -253,9 +253,9 @@ def main():
     print("=" * 60)
 
     # 运行双均线策略
-    cerebro1 = run_strategy(DualMAStrategy, "双均线策略")
-
+    cerebro1 = run_strategy(PriceMAStrategy, "价格与均线策略")
     # 可以选择运行其他策略
+    # run_strategy(DualMAStrategy, "双均线策略")
     # run_strategy(TripleMAStrategy, "三均线策略")
     # run_strategy(PriceMAStrategy, "价格与均线策略")
 
@@ -263,7 +263,6 @@ def main():
     print("\n📈 正在生成图表...")
     cerebro1.plot(style='candlestick', barup='red', bardown='green')
     print("✓ 完成！")
-
 
 if __name__ == '__main__':
     main()
